@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.antriksh.app.model.User;
 import com.antriksh.app.repository.IUserRepository;
@@ -20,6 +21,12 @@ public class UserController {
 	public String showloginPage() {
 
 		return "login/login";
+	}
+	@RequestMapping("/")
+	@ResponseBody
+	public String indexPage() {
+
+		return "index.jsp";
 	}
 
 	@RequestMapping(value = "/showReg")

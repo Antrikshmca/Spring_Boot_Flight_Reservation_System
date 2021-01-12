@@ -2,6 +2,7 @@ package com.antriksh.app.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,25 +20,47 @@ public class FlightController {
 
 	@Autowired
 	private IFlightRepository flightRepo;
+	 @RequestMapping("/findFlights")
+	public String findf(ModelMap map) {
+		List<Flight> findAll = flightRepo.findAll();
+		//findAll.forEach(System.out::println);
+		map.addAttribute("findFlights",findAll);
+		return "displayFlights";
+	}
 
 	@RequestMapping(value = "/flightReg")
 	public String showRegistration() {
 		return "flight/flightDetails";
 	}
 
+	@RequestMapping("/saveFlight")
 	public String saveReg(@ModelAttribute("flight") Flight flight) {
 		flightRepo.save(flight);
+		
 		return "flight/flightDetailsSave";
 	}
-	@RequestMapping("/findFlights")
-	public String findFlight(
-	  @RequestParam("from") String from, @RequestParam("to") String to,
-	  @RequestParam("departureDate") @DateTimeFormat(pattern="MM-dd-yyyy") Date departureDate,
-	  ModelMap modelMap)
-	  {
-		List<Flight> findFlights = flightRepo.findFlights(from,to,departureDate);
-		System.out.println(findFlights);
-	   return "displayFlights";
-	   }
 
+	
+	/*
+	 * @RequestMapping("/findFlights") public String
+	 * 
+	 * findFlight(@RequestParam("from") String from, @RequestParam("to") String to,
+	 * 
+	 * @RequestParam("departureDate") @DateTimeFormat(pattern = "MM-dd-yyyy") Date
+	 * departureDate, ModelMap modelMap) { List<Flight> findFlight =
+	 * flightRepo.findFlights(from, to, departureDate);
+	 * System.out.println(findFlight); // findFlights.forEach(System.out::println);
+	 * modelMap.addAttribute("findFlights", findFlight); return "displayFlights"; }
+	 */
+	 
+
+	@RequestMapping("/showCompleteReservation")
+	public String showCompleteReservation(@RequestParam("flightId") Long flightId, ModelMap map) {
+		Optional<Flight> findById = flightRepo.findById(flightId);
+		Flight flight = findById.get();
+		System.out.println(flight);
+		map.addAttribute("flight", flight);
+		return "showReservation";
+	}
+	
 }
