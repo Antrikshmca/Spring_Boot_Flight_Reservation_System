@@ -2,11 +2,12 @@ package com.antriksh.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.antriksh.app.model.User;
 import com.antriksh.app.repository.IUserRepository;
@@ -22,31 +23,36 @@ public class UserController {
 
 		return "login/login";
 	}
+
 	@RequestMapping("/")
-	@ResponseBody
 	public String indexPage() {
 
-		return "index.jsp";
+		return "index";
 	}
 
 	@RequestMapping(value = "/showReg")
 	public String showRegistrations() {
 		return "login/showReg";
 	}
-	/*
-	 * @RequestMapping(value = "/showRegg") public String showRegistration() {
-	 * return "login/flightDetails"; }
-	 */
+	
+	  @RequestMapping(value = "/showRegg") 
+	  public String showRegistration() {
+	  return "login/flightDetails"; }
+	 
 
-	@RequestMapping("/saveReg")
-	public String saveReg(@ModelAttribute("user") User user) {
-		userRepo.save(user);
-		return "login/login";
-	}
+	
+	  @RequestMapping("/saveReg") 
+	  public String saveReg(@ModelAttribute("user") User user) {
+	   userRepo.save(user);
+	   return "login/login"; }
+	 
+	
+
 
 	@RequestMapping("/verifyLogin")
 	public String verifyLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelMap map) {
+
 		User user = userRepo.findByEmail(email);
 		if (user != null) {
 			if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
@@ -56,7 +62,7 @@ public class UserController {
 				return "login/login";
 			}
 		} else {
-			
+
 			map.addAttribute("error", "inavlid username / password");
 			return "login/login";
 		}

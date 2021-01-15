@@ -13,9 +13,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h2>Login here</h2>
+<!-- <h2>Login here</h2> -->
 ${error}
-<form action="verifyLogin" method="post">
+<div class="container">
+<div class="card bg-light">
+<div class="card-body mx-auto">
+<h4 class="card-title mt-3 text-center">Login Here</h4>
+<form  action="verifyLogin" method="post">
   <div class="form-group">
     <label for="email">Email address:</label>
     <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
@@ -31,5 +35,10 @@ ${error}
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
+</div>
+</div>
+</div>
 </body>
 </html>

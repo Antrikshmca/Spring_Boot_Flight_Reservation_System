@@ -25,12 +25,12 @@
 		</tr>
 		<c:forEach items="${findFlights}" var="findFlights">
 			<tr>
-		    <th>${findFlights.flightNumber}</th>
-		    <th>${findFlights.operatingAirlines}</th>
-		    <th>${findFlights.departureCity}</th>
-		    <th>${findFlights.arrivalCity}</th>
-		    <th>${findFlights.dateOfDeparture}</th>
-		    <th>${findFlights.estimatedDepartureTime}</th>
+		    <td>${findFlights.flightNumber}</td>
+		    <td>${findFlights.operatingAirlines}</td>
+		    <td>${findFlights.departureCity}</td>
+		    <td>${findFlights.arrivalCity}</td>
+		    <td>${findFlights.dateOfDeparture}</td>
+		    <td>${findFlights.estimatedDepartureTime}</td>
 		    <td><a href="showCompleteReservation?flightId=${findFlights.id}">select</a></td>
 		</tr>
 		</c:forEach>

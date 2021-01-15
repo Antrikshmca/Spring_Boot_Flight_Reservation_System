@@ -29,7 +29,7 @@
   </div>
   <div class="form-group">
     <label for="dep">Departure Date:</label>
-    <input type="text" class="form-control" id="dep" placeholder="Enter Departure Date" name="departureDate" required>
+    <input type="date" class="form-control" id="dep" placeholder="Enter Departure Date" name="departureDate" required>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
   </div>

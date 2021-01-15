@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="ISO-8859-1">
 <title>Reservation Details</title>
  <meta charset="utf-8">
@@ -26,7 +26,7 @@ Flight Date : ${flight.dateOfDeparture}<br>
 <div class="container">
 <h1 align="center" class="text-primary">Enter The Passenger Details</h1>
 </div>
-<form action="completeReservation" class="was-validated" method="post">
+<form action="confirmReservation" class="was-validated" method="post">
   <div class="form-group">
     <label for="fname">FirstName:</label>
     <input type="text" class="form-control" id="fname" placeholder="Enter firstname" name="firstName" required>
@@ -78,7 +78,7 @@ Flight Date : ${flight.dateOfDeparture}<br>
   </div>
   <div class="form-group">
     <label for="ed">Expiry Date:</label>
-    <input type="text" class="form-control" id="ed" placeholder="Enter Expiriy Number" name="exNumber" required>
+    <input type="date" class="form-control" id="ed" placeholder="Enter Expiriy Number" name="exNumber" required>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
   </div>
