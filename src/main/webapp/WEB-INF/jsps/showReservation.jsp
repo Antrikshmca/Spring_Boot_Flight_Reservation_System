@@ -11,6 +11,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style type="text/css">
+.my-card{
+	padding: 20px;
+	background: #FFFFFF;
+}
+  </style>
 </head>
 <body>
 <div class="container">
@@ -26,6 +32,11 @@ Flight Date : ${flight.dateOfDeparture}<br>
 <div class="container">
 <h1 align="center" class="text-primary">Enter The Passenger Details</h1>
 </div>
+<div class="container">
+<div class="card" style="width:500px">
+			 <div class="card bg-secondary text-white">
+			 <div class="card-body">
+				<!-- <div class="my-card"> -->
 <form action="confirmReservation" class="was-validated" method="post">
   <div class="form-group">
     <label for="fname">FirstName:</label>
@@ -94,5 +105,9 @@ Flight Date : ${flight.dateOfDeparture}<br>
   </div>
   <button type="submit" class="btn btn-primary"  name="save" value="Complete Reservation">Submit</button>
 </form>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -27,11 +27,13 @@
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="index.jsp">Home</a>
+  <a class="navbar-brand" href="/">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
+  
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="showReg">Registration</a>
@@ -45,13 +47,14 @@
       <li class="nav-item">
         <a class="nav-link" href="flightReg">Add Flights</a>
       </li>
-         
-    </ul>
-     <ul class="nav navbar-nav navbar-right">
+      </ul>   
+    
+   
+    <!--  <ul class="nav navbar-nav navbar-right">
      <li>
 	  <a href="index" data-toggle="modal" data-target="#logoutModal">logout</a>
 	  </li> 
-     </ul>
+     </ul> -->
   </div>  
 
 <!-- Small modal -->
@@ -102,9 +105,8 @@
       <hr class="d-sm-none">
     </div> -->
   <div class="container">
-  <h2>Rounded Corners</h2>
-  <p>The .rounded class adds rounded corners tso an image:</p>            
-    <img class="img-fluid" src="/image1.jpg" alt="Chania" width= "460" height="auto"> 
+            
+    <img class="img-fluid" src="/images/image1.jpg" alt="Chania" max-width:= 100% height=100%>
   
 </div>
    <!--  <div class="col-sm-8">

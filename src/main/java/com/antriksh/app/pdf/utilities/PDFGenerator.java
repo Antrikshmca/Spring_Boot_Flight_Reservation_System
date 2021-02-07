@@ -3,6 +3,7 @@ package com.antriksh.app.pdf.utilities;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -29,15 +30,17 @@ public class PDFGenerator {
 	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
 
+	 
+	
 	public void generatePDF(String filePath, String name, String emailId, String phone, String operatingAirlines,
-			String departureDate, String departureCity, String arrivalcity) {
+			 String departureCity, String arrivalcity,Date departureDate) {
 		try {
 			Document document = new Document();
 			PdfWriter.getInstance(document, new FileOutputStream(filePath));
 			document.open();
 			addMetaData(document);
-			addTitleAndTable(document, name, emailId, phone, operatingAirlines, departureDate, departureCity,
-					arrivalcity);
+			addTitleAndTable(document, name, emailId, phone, operatingAirlines,  departureCity,
+					arrivalcity,departureDate);
 			document.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +56,7 @@ public class PDFGenerator {
 	}
 
 	public static void addTitleAndTable(Document document, String name, String emailId, String phone,
-			String operatingAirlines, String departureDate, String departureCity, String arrivalcity)
+			String operatingAirlines,  String departureCity, String arrivalcity,Date departureDate)
 			throws DocumentException, MalformedURLException, IOException {
 		Paragraph preface = new Paragraph();
 		preface.add(new Paragraph("Flight Booking Details", catFont));
@@ -63,6 +66,7 @@ public class PDFGenerator {
 		document.add(Chunk.NEWLINE);
 		// Creating an ImageData object       
 	      String imFile = "C:\\Users\\Antriksh\\Desktop\\Ticket\\indigo-Image.png";       
+	     // String imFile = "/static/images/indigo-Image.png";       
 	      
 	      // Creating an Image object        
 	      Image image =  Image.getInstance(imFile);
@@ -90,6 +94,9 @@ public class PDFGenerator {
 		table.addCell(phone);
 
 		document.add(table);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
+	    String strDate = formatter.format(departureDate); 
 
 		PdfPTable table1 = new PdfPTable(2);
 		table1.setWidthPercentage(100);
@@ -101,10 +108,13 @@ public class PDFGenerator {
 
 		table1.addCell("Opearting Airlines");
 		table1.addCell(operatingAirlines);
-		table1.addCell("Departure Date");
-		table1.addCell(departureDate);
 		table1.addCell("Departure City");
 		table1.addCell(departureCity);
+		table1.addCell("Arrival City");
+		table1.addCell(arrivalcity);
+		table1.addCell("Departure Date");
+		table1.addCell(strDate);
+		
 		document.add(table1);
 		
 		document.add(Chunk.NEWLINE);

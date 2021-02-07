@@ -1,8 +1,14 @@
 package com.antriksh.app.service.impl;
 
+import java.io.File;
 import java.util.Optional;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.antriksh.app.model.Flight;
@@ -18,6 +24,9 @@ import com.antriksh.app.service.IReservationService;
 public class ReservationServiceImpl implements IReservationService {
 
 	@Autowired
+	private JavaMailSender javaMailSender;
+
+	@Autowired
 	private Reservation reservation;
 	@Autowired
 	private IFlightRepository frepo;
@@ -29,7 +38,8 @@ public class ReservationServiceImpl implements IReservationService {
 	private IReservationRepository repo;
 
 	//private String filePath="E:\\tickets\\booking\\book";
-	private String filePath="C:\\Users\\Antriksh\\Desktop\\Ticket\\books";
+	//private String filePath="C:\\Users\\Antriksh\\Desktop\\Ticket\\books+reservation.getId()+.pdf";
+	
 	@Override
 	public Reservation bookFlight(ReservationRequest request) {
 		pas.setFirstName(request.getFirstName());
@@ -49,10 +59,30 @@ public class ReservationServiceImpl implements IReservationService {
 		reservation.setNumberOfBags(0);
 		
 		repo.save(reservation);
+		 String filePath="E:\\PSA\\Spring_Boot_Flight_Reservation\\PDFDocs\\books+reservation.getId()+.pdf";
 		PDFGenerator pdf=new PDFGenerator();
-		pdf.generatePDF(filePath+reservation.getId()+".pdf", request.getFirstName(), request.getEmail(), request.getPhone(), flight.getOperatingAirlines(),
-				flight.getArrivalCity(), flight.getDepartureCity(),flight.getArrivalCity());
+		pdf.generatePDF(filePath, request.getFirstName(), request.getEmail(), request.getPhone(), flight.getOperatingAirlines(),
+				 flight.getDepartureCity(),flight.getArrivalCity(),flight.getDateOfDeparture());
 		System.out.println("pdf created");
+		
+		
+		MimeMessage message = javaMailSender.createMimeMessage();
+		try {
+		MimeMessageHelper msg=new MimeMessageHelper(message,true);
+		msg.setFrom("antrikshsrivastava111@gmail.com");
+		msg.setTo(request.getEmail());
+		msg.setSubject("Booked Flight");
+		msg.setText("Hello",true);
+		
+		msg.addAttachment("Attachment", new File(filePath));
+		
+		javaMailSender.send(message);
+		System.out.println("sent mail");
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		return reservation;
 	}
 

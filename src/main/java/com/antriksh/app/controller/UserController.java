@@ -18,16 +18,23 @@ public class UserController {
 	@Autowired
 	private IUserRepository userRepo;
 
+	@RequestMapping("/about")
+	public String about(Model map) {
+		map.addAttribute("tittle", "about-Smart Contact Managert");
+
+		return "about";
+
+	}
 	@RequestMapping("/showLoginPage")
 	public String showloginPage() {
 
 		return "login/login";
 	}
 
-	@RequestMapping("/")
+	@RequestMapping({"/","index","home","default"})
 	public String indexPage() {
 
-		return "index";
+		return "base";
 	}
 
 	@RequestMapping(value = "/showReg")
